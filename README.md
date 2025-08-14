@@ -1,5 +1,9 @@
 
 
+<p align="center">
+  <img src="https://github.com/Pavel-P09/PP-MITM-Shield/blob/master/images/mitm%20(1).jpg?raw=true" alt="PP-MITM-Shield Architecture">
+</p>
+
 
 
 
