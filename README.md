@@ -36,53 +36,99 @@ and broadcast poisoning.
 
 ## 📂 Project Structure
 
+
 ```
 PP-MITM-Shield/
 │
-├── arp_protect.py
-├── dns_protect.py
-├── dhcp_protect.py
-├── ssl_strip_detect.py
-├── rogue_ap.py
-├── broadcast_poison.py
-├── icmp_redirect_guard.py
-├── http_redirect_watch.py
-├── main.py                # Main menu / module launcher
-├── learning_menu.py       # Learning mode & whitelist/blacklist management
-├── logs/                  # Alert logs
-└── lists/                 # Whitelists / blacklists
+├── alerts.log                # Main alert log file
+├── arp_protect.py             # ARP spoofing detection & blocking
+├── blacklist.txt              # List of blacklisted IP/MAC addresses
+├── blocks.txt                 # Active firewall block records
+├── broadcast_poison.py        # LLMNR/mDNS/NBNS/WSD broadcast spoof detection
+├── dhcp_protect.py            # DHCP spoofing detection & blocking
+├── dns_protect.py             # DNS spoofing detection & blocking
+├── http_redirect_watch.py     # HTTPS→HTTP downgrade detection
+├── icmp_redirect_guard.py     # ICMP redirect attack detection
+├── learning_menu.py           # Learning mode & list management
+├── logs/                      # Directory for additional log files
+├── main.py                    # Main interactive menu / module launcher
+├── README.md                  # Project documentation
+├── rogue_ap.py                # Rogue access point detection
+├── ssl_strip_detect.py        # SSL stripping detection
+├── whitelist.txt              # List of whitelisted IP/MAC addresses
+└── LICENSE                    # License file
 ```
 
----
+## 📦 Installation & Dependencies (Red Hat / CentOS / Rocky / AlmaLinux)
 
-## 🔧 Requirements
+PP‑MITM‑Shield requires Python 3 and several libraries/tools to operate.
+Below are the tested dependencies and installation commands for Red Hat–based systems.
 
-- Python **3.8+**
-- `scapy`
-- `iptables` (Linux only)
-- Root privileges (`sudo`) for packet capture and firewall rules
-
----
-
-## 📥 Installation
-
+### 1️⃣ Update system
 ```bash
-# Clone the repository
-git clone https://github.com/Pavel-P09/PP-MITM-Shield.git
-cd PP-MITM-Shield
+sudo dnf update -y
+```
 
-# Install dependencies
+### 2️⃣ Install required system packages
+```bash
+sudo dnf install -y \
+  python3 python3-pip \
+  iptables iproute \
+  git
+```
+> Notes  
+> - On EL8/EL9, `iptables` is the nftables shim and works fine with this project.  
+> - SELinux may stay Enforcing; the tool only sniffs traffic and manages host firewall rules.
+
+### 3️⃣ (Recommended) Create a Python virtual environment
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+```
+
+### 4️⃣ Python libraries
+Minimal dependency set is **Scapy**.
+```bash
+pip install --upgrade scapy
+```
+
+If you prefer a requirements file, add:
+```text
+scapy>=2.5.0
+```
+and install with:
+```bash
 pip install -r requirements.txt
 ```
 
----
+### 5️⃣ Clone the repository
+```bash
+git clone https://github.com/Pavel-P09/PP-MITM-Shield.git
+cd PP-MITM-Shield
+```
 
-## ▶️ Usage
+### 6️⃣ (Optional) Make scripts executable
+```bash
+chmod +x *.py
+```
 
-### Launch Main Menu
+### 7️⃣ Run the tool
 ```bash
 sudo python3 main.py
 ```
+> Run with `sudo` to enable raw‑socket capture and automatic firewall blocking.
+
+### 🔧 Optional utilities for lab diagnostics (not required for protection)
+```bash
+sudo dnf install -y tcpdump
+```
+
+### ✅ Verified environment
+- OS: Rocky Linux 9 / AlmaLinux 9 / CentOS Stream 9 (EL9)
+- Kernel: 5.x (EL9)
+- Python: 3.9+
+
 
 ### Menu Structure
 1. **Learning / Lists / Firewall / Logs** – Manage whitelists, blacklists, view logs, clear firewall rules.
