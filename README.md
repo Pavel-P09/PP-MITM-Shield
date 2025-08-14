@@ -172,6 +172,15 @@ You will be prompted for:
 
 ---
 
+## Network-Wide Deployment
+
+While **PP-MITM-Shield** is currently designed for host-level protection, the same multi-layer MITM defense logic can be deployed network-wide.  
+By running lightweight agents on strategically placed VLAN segments or selected network nodes, it is possible to provide centralized monitoring and coordinated blocking for all connected devices.  
+
+Such an architecture would allow scalable protection across the entire infrastructure without the need to install the tool on every single host.  
+This extended network-wide version can be developed as a custom solution upon request.
+
+
 ## 📜 License
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
