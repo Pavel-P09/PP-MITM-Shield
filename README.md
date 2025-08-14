@@ -1,7 +1,10 @@
 # PP-MITM-Shield
-
-**PP-MITM-Shield** is a multi-layered host-level defense system against various forms of **Man-in-the-Middle (MITM)** and network spoofing attacks.  
-It is designed for deployment on **Linux** hosts to provide **real-time detection**, **alerting**, and **automatic blocking** of malicious traffic at the firewall level.
+  
+**PP-MITM-Shield** is a multi-layer protection tool against Man-in-the-Middle (MITM) attacks  
+for Linux systems (tested on Red Hat-based distributions).  
+It provides real-time detection and active blocking of suspicious traffic across multiple protocols,  
+preventing ARP spoofing, DNS poisoning, DHCP attacks, SSL stripping, ICMP redirects, rogue AP connections,  
+and broadcast poisoning.
 
 ---
 
